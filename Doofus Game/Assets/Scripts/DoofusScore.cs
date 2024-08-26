@@ -13,6 +13,8 @@ public class DoofusScore : MonoBehaviour
     private bool hasScored = false;
     private bool isFirstPlatform = true;
 
+    private bool isGameOver = false;
+
     void Start()
     {
         InitializeGame();
@@ -45,8 +47,9 @@ public class DoofusScore : MonoBehaviour
             isFirstPlatform = false;
         }
 
-        if (transform.position.y < fallThreshold)
+        if (transform.position.y < fallThreshold && !isGameOver)
         {
+            isGameOver = true;
             GameOver();
         }
     }
@@ -77,7 +80,7 @@ public class DoofusScore : MonoBehaviour
         }
 
         Debug.Log("Doofus has fallen below the threshold!");
-        Time.timeScale = 0; // Pause the game
+        Time.timeScale = 0;
     }
 
     void InitializeGame()

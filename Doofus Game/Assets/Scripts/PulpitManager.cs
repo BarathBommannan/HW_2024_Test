@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PulpitManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class PulpitManager : MonoBehaviour
     void Start()
     {
         lastPosition = Vector3.zero;
-        
+
         currentPulpit = Instantiate(pulpitPrefab, lastPosition, Quaternion.identity);
         previousPulpit = currentPulpit;
 
@@ -43,6 +44,10 @@ public class PulpitManager : MonoBehaviour
 
             Vector3 spawnPosition = GetRandomDirection();
             currentPulpit = Instantiate(pulpitPrefab, spawnPosition, Quaternion.identity);
+
+            // Get the countdown text component from the current pulpit
+            Text countdownText = currentPulpit.GetComponentInChildren<Text>();
+            StartCoroutine(UpdateCountdown(countdownText, destroyTime));
 
             if (previousPulpit != null)
             {
@@ -67,7 +72,25 @@ public class PulpitManager : MonoBehaviour
             renderer.enabled = false;
         }
 
-        Destroy(pulpit, 1f);
+        Destroy(pulpit, 0);
+    }
+
+    IEnumerator UpdateCountdown(Text countdownText, float countdownTime)
+    {
+        while (countdownTime > 0)
+        {
+            if (countdownText != null)
+            {
+                countdownText.text = "Destroy in: " + countdownTime.ToString("F1") + "s";
+            }
+            countdownTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        if (countdownText != null)
+        {
+            countdownText.text = "";
+        }
     }
 
     Vector3 GetRandomDirection()

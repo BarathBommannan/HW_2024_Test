@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public Button playButton; // Reference to the Play button
+    public Button playButton;
 
     void Start()
     {
