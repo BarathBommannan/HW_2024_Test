@@ -6,8 +6,8 @@ public class DoofusScore : MonoBehaviour
 {
     public ScoreManager scoreManager;
     public float fallThreshold = -10f;
-    public Text gameOverText; // Reference to the Game Over Text UI element
-    public Button retryButton; // Reference to the Retry Button
+    public Text gameOverText;
+    public Button retryButton;
 
     private Transform currentPlatform;
     private bool hasScored = false;
@@ -47,19 +47,7 @@ public class DoofusScore : MonoBehaviour
 
         if (transform.position.y < fallThreshold)
         {
-            // Show the Game Over text and Retry button
-            if (gameOverText != null)
-            {
-                gameOverText.gameObject.SetActive(true);
-            }
-
-            if (retryButton != null)
-            {
-                retryButton.gameObject.SetActive(true);
-            }
-
-            Debug.Log("Doofus has fallen below the threshold!");
-            Time.timeScale = 0; 
+            GameOver();
         }
     }
 
@@ -76,17 +64,24 @@ public class DoofusScore : MonoBehaviour
         return null;
     }
 
-    void OnRetryButtonClicked()
+    void GameOver()
     {
-        // Reload the current scene
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
-        Time.timeScale = 1; // Ensure the game resumes
+        if (gameOverText != null)
+        {
+            gameOverText.gameObject.SetActive(true);
+        }
+
+        if (retryButton != null)
+        {
+            retryButton.gameObject.SetActive(true);
+        }
+
+        Debug.Log("Doofus has fallen below the threshold!");
+        Time.timeScale = 0; // Pause the game
     }
 
     void InitializeGame()
     {
-        // Initialize game elements
         currentPlatform = GetCurrentPlatform();
         if (currentPlatform != null)
         {
@@ -105,7 +100,6 @@ public class DoofusScore : MonoBehaviour
         if (retryButton != null)
         {
             retryButton.gameObject.SetActive(false);
-            retryButton.onClick.AddListener(OnRetryButtonClicked);
         }
         else
         {
