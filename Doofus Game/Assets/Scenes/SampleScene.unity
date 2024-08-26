@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63be0a7e6d71f6543848c7344d5006ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pulpitPrefab: {fileID: 4201431905754614297, guid: 3f2afa0c2356e29409508097c1d83280, type: 3}
+  pulpitPrefab: {fileID: 7837448122471550926, guid: 31a038544ff29eb4cb498a8a14af56a9, type: 3}
   startPoint: {fileID: 131575478}
   minPulpitDestroyTime: 4
   maxPulpitDestroyTime: 5
@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 360001745}
   - component: {fileID: 360001744}
   - component: {fileID: 360001749}
+  - component: {fileID: 360001750}
   m_Layer: 0
   m_Name: Doofus
   m_TagString: Untagged
@@ -387,7 +388,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6eca9e3afe4fe54db1c0ae9d08fc341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.3
+  speed: 3
+--- !u!114 &360001750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360001743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53031dc1baae6154fbe963c56f225b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreManager: {fileID: 1221412230}
+  fallThreshold: -10
 --- !u!1 &367698355
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,6 +885,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1196184832}
   m_CullTransparentMesh: 1
+--- !u!1 &1221412229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1221412231}
+  - component: {fileID: 1221412230}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1221412230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221412229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3e8d1e9711aae4eb2d27c7656f62fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 367698357}
+--- !u!4 &1221412231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221412229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1364693815
 GameObject:
   m_ObjectHideFlags: 3
@@ -1069,3 +1129,4 @@ SceneRoots:
   - {fileID: 131575478}
   - {fileID: 204433402}
   - {fileID: 1145665231}
+  - {fileID: 1221412231}
