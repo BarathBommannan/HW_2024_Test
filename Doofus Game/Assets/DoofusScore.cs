@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DoofusScore : MonoBehaviour
 {
     public ScoreManager scoreManager;
     public float fallThreshold = -10f;
+    public Text gameOverText; // Reference to the Game Over Text UI element
+    public Button retryButton; // Reference to the Retry Button
 
     private Transform currentPlatform;
     private bool hasScored = false;
@@ -11,11 +15,7 @@ public class DoofusScore : MonoBehaviour
 
     void Start()
     {
-        currentPlatform = GetCurrentPlatform();
-        if (currentPlatform != null)
-        {
-            isFirstPlatform = false;
-        }
+        InitializeGame();
     }
 
     void Update()
@@ -47,7 +47,17 @@ public class DoofusScore : MonoBehaviour
 
         if (transform.position.y < fallThreshold)
         {
-            // code for doofus fall or level restart
+            // Show the Game Over text and Retry button
+            if (gameOverText != null)
+            {
+                gameOverText.gameObject.SetActive(true);
+            }
+
+            if (retryButton != null)
+            {
+                retryButton.gameObject.SetActive(true);
+            }
+
             Debug.Log("Doofus has fallen below the threshold!");
             Time.timeScale = 0; 
         }
@@ -64,5 +74,42 @@ public class DoofusScore : MonoBehaviour
             }
         }
         return null;
+    }
+
+    void OnRetryButtonClicked()
+    {
+        // Reload the current scene
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+        Time.timeScale = 1; // Ensure the game resumes
+    }
+
+    void InitializeGame()
+    {
+        // Initialize game elements
+        currentPlatform = GetCurrentPlatform();
+        if (currentPlatform != null)
+        {
+            isFirstPlatform = false;
+        }
+        
+        if (gameOverText != null)
+        {
+            gameOverText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Game Over Text reference is not assigned.");
+        }
+
+        if (retryButton != null)
+        {
+            retryButton.gameObject.SetActive(false);
+            retryButton.onClick.AddListener(OnRetryButtonClicked);
+        }
+        else
+        {
+            Debug.LogError("Retry Button reference is not assigned.");
+        }
     }
 }
