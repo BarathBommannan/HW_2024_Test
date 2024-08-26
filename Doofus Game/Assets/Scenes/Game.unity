@@ -1501,6 +1501,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doofus
       objectReference: {fileID: 0}
+    - target: {fileID: 4322187700337303628, guid: 8287d1a45617d6e4a874c981309566af, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4474390849239944529, guid: 8287d1a45617d6e4a874c981309566af, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
